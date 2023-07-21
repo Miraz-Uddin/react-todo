@@ -1,0 +1,9 @@
+.marked {
+    color: #d1b7b7;
+    background: #585858;
+}
+
+.unmarked {
+    color: rgb(90, 30, 30);
+    background: rgb(232, 249, 255);
+}
