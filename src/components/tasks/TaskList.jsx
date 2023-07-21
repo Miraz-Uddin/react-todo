@@ -1,21 +1,25 @@
 import React from "react";
-import { Col, Row } from "react-bootstrap";
+import { Card, Col, Row } from "react-bootstrap";
 import SingleTask from "./SingleTask";
 
-export default function TaskList({ tasks }) {
+export default function TaskList({ tasks, deleteTask, markComplete }) {
   return (
     <Row xs={1} md={2} className="g-4">
       {tasks && tasks.length > 0 ? (
         tasks.map((task) => (
           <Col key={task.id}>
-            <SingleTask task={task} />
+            <SingleTask
+              task={task}
+              deleteTask={deleteTask}
+              markComplete={markComplete}
+            />
           </Col>
         ))
       ) : (
-        <Col>
-          <div className={`box`}>
-            <p className="box-text">No Tasks Added Yet</p>
-          </div>
+        <Col className="mx-auto">
+          <Card bg={"warning"}>
+            <Card.Body className="text-center p-4">No Tasks Left !!!</Card.Body>
+          </Card>
         </Col>
       )}
     </Row>

@@ -1,27 +1,59 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AddTask from "./tasks/AddTask";
 import TaskList from "./tasks/TaskList";
 
 function Content() {
-  const [tasks, setTasks] = useState();
-  useEffect(() => {
-    setTasks([
-      {
-        id: 1689958971131,
-        title: "Create Slide and Download Necessary Images",
-        isMarked: true,
-      },
-      {
-        id: 1689959155279,
-        title: "Upload in Google Drive And Share the Link",
+  const [task, setTask] = useState("");
+  const [taskError, setTaskError] = useState("");
+  const [tasks, setTasks] = useState([]);
+
+  const createTask = (e) => {
+    e.preventDefault();
+    if (task === "" || task === undefined || task === null) {
+      setTaskError("Please Enter Something");
+    } else {
+      const newTask = {
+        id: Date.now(),
+        title: task,
         isMarked: false,
-      },
-    ]);
-  }, []);
+      };
+      setTaskError("");
+      setTasks([...tasks, newTask]);
+      setTask("");
+    }
+  };
+  const onChangeTaskInput = (e) => {
+    setTaskError("");
+    setTask(e.target.value);
+  };
+  const deleteTask = (id) => {
+    const filteredTasks = tasks.filter((task) => task.id !== id);
+    setTasks(filteredTasks);
+  };
+  const markComplete = (id) => {
+    const updatedTasks = tasks.map((task) => {
+      if (task.id === id) {
+        return { ...task, isMarked: true };
+      }
+      return { ...task };
+    });
+    setTasks(updatedTasks);
+  };
+
   return (
     <>
-      <AddTask />
-      <TaskList tasks={tasks} />
+      <AddTask
+        task={task}
+        createTask={createTask}
+        onChangeTaskInput={onChangeTaskInput}
+        taskError={taskError}
+        setTaskError={setTaskError}
+      />
+      <TaskList
+        tasks={tasks}
+        deleteTask={deleteTask}
+        markComplete={markComplete}
+      />
     </>
   );
 }

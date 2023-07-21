@@ -1,22 +1,32 @@
-import { useState } from "react";
-import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
-
-function AddTask() {
-  const [task, setTask] = useState("");
-  const [taskError, setTaskError] = useState("");
-
-  const handleCreateTask = (event) => {
-    event.preventDefault();
-    // const form = event.currentTarget;
-    setTaskError("");
-  };
-  const onChangeTaskInput = (el) => {
-    setTask(el.target.value);
-  };
+import { Alert, Button, Col, Form, InputGroup, Row } from "react-bootstrap";
+import style from "./Tasks.module.css";
+function AddTask({
+  task,
+  createTask,
+  onChangeTaskInput,
+  taskError,
+  setTaskError,
+}) {
   return (
     <Row className="mt-3">
       <Col xs={12} sm={10} md={10} lg={10} className="mx-auto">
-        <Form onSubmit={handleCreateTask}>
+        <Form onSubmit={createTask}>
+          {taskError && (
+            <>
+              <Row>
+                <Col sm="12" md="11">
+                  <Alert
+                    size="sm"
+                    variant="danger"
+                    onClose={() => setTaskError("")}
+                    dismissible
+                  >
+                    <p className="mb-0">{taskError}</p>
+                  </Alert>
+                </Col>
+              </Row>
+            </>
+          )}
           <Form.Group as={Row} className="mb-3" controlId="task-title">
             <Col sm="12" md="9">
               <InputGroup className="mb-3">
@@ -28,11 +38,15 @@ function AddTask() {
                   onChange={onChangeTaskInput}
                   value={task}
                 />
-                {taskError && <>Please Input Something</>}
               </InputGroup>
             </Col>
             <Col sm="12" md="3">
-              <Button variant="info" id="enter-task" type="submit">
+              <Button
+                className={style.addTaskBtn}
+                variant="info"
+                id="enter-task"
+                type="submit"
+              >
                 Add Task
               </Button>
             </Col>

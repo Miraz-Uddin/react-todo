@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import convertTimestamp from "../../utils/convertTimestamp";
 import style from "./Tasks.module.css";
 
-export default function SingleTask({ task }) {
+export default function SingleTask({ task, deleteTask, markComplete }) {
   const { id, title, isMarked } = task || {};
   const createdAt = convertTimestamp(id);
 
@@ -21,11 +21,21 @@ export default function SingleTask({ task }) {
       )}
 
       <div className="position-absolute bottom-0 end-0">
-        <Button size="sm" variant="danger" className="me-2 mb-2">
+        <Button
+          size="sm"
+          variant="danger"
+          className="me-2 mb-2"
+          onClick={() => deleteTask(id)}
+        >
           Delete
         </Button>
         {!isMarked && (
-          <Button size="sm" variant="success" className="me-2 mb-2">
+          <Button
+            size="sm"
+            variant="success"
+            className="me-2 mb-2"
+            onClick={() => markComplete(id)}
+          >
             Mark As Completed
           </Button>
         )}
