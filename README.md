@@ -1,7 +1,7 @@
 <br />
  <p align="center">
     <img src="./logo.png" alt="Logo" width="207" height="47" />
-    <h3 align="center "><a href="https://react-todo.vercel.app" target="_blank">Crate a To-do list App</a></h3>
+    <h3 align="center "><a href="https://react-todo-by-miraz.vercel.app" target="_blank">Crate a To-do list App</a></h3>
 </p>
 
 <!-- TABLE OF CONTENTS -->
@@ -43,7 +43,7 @@
 
 ## ![liveLinkIcon][live-link-icon-shield] LIVE LINK
 
-#### URL: https://react-todo.vercel.app
+#### URL: https://react-todo-by-miraz.vercel.app
 
 <br>
 
